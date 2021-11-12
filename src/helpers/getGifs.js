@@ -3,7 +3,7 @@ export const getGifs = async (category) => {
         const apiUrl = 'https://api.giphy.com/v1/gifs/search';
         const apiKey = 'vV7JjQhMXQHb5KWNF0epDMYqfG7nDc0a';
         const limit = 10;
-        const response = await fetch(`${apiUrl}?q=${category}&limit=${limit}&api_key=${apiKey}`);
+        const response = await fetch(`${apiUrl}?q=${encodeURI(category)}&limit=${limit}&api_key=${apiKey}`);
         const { data } = await response.json();
         const gifs = data.map(img => {
             return {
@@ -13,7 +13,6 @@ export const getGifs = async (category) => {
             }
         });
         return gifs;
-        // setImages(gifs) 
     } catch (error) {
         console.error(error);
     }
